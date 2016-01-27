@@ -7,7 +7,7 @@ var Promise = require('es6-promise').Promise;
 
 
 function reThrow(reject, error) {
-  setTimeout(function(){ 
+  setTimeout(function(){
       if (error && error.stack) {
           console.error(error.stack);
       }
@@ -48,7 +48,7 @@ function reThrow(reject, error) {
           try {
             Dispatcher.dispatch(payload);
           } catch (error) {
-            reThrow(reject, error); 
+            reThrow(reject, error);
           }
 
           resolve();
@@ -186,7 +186,7 @@ var iv = require('invariant');
     assign(this, EventEmitter.prototype, methods);
     this.mixin = {
       componentDidMount: function() {
-        var warn = (console.warn || console.log).bind(console),
+        var warn = ('bind' in console.log) ? (console.warn || console.log).bind(console) : function() {},
           changeFn;
         if(!this.storeDidChange){
             warn("A component that uses a McFly Store mixin is not implementing storeDidChange. onChange will be called instead, but this will no longer be supported from version 1.0.");
